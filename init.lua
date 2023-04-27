@@ -90,27 +90,16 @@ dap.adapters.lldb = {
 	name = 'lldb'
 }
 
-dap.configurations.cpp = {
+dap.configurations.rust = {
 	{
 		name = 'Launch',
 		type = 'lldb',
 		request = 'launch',
 		program = function()
-			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+			return vim.fn.input('Path to executable: ', vim.fn.expand('%:p:h:s?src?target/debug/?'), 'file')
 		end,
 		cwd = '${workspaceFolder}',
 		stopOnEntry = false,
 		args = {},
 	},
 }
-
--- If you want to use this for Rust and C, add something like this:
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
-
--- Vimspector options
-vim.cmd([[
-let g:vimspector_sidebar_width = 85
-let g:vimspector_bottombar_height = 15
-let g:vimspector_terminal_maxwidth = 70
-]])

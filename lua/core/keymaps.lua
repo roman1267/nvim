@@ -180,21 +180,45 @@ local mappings = {
 	-- TODO: update after I've decided which debugger to use
 	-------------------- nvim-dap --------------------
 	-- <leader>d[key] reserved
-	{ { 'n' }, '<leader>dbp', function()
+	{ { 'n' }, '<leader>du', function()
+		return require('dapui').toggle()
+	end, { desc = '[D]ebug toggle [U]I' } },
+	{ { 'n' }, '<leader>dt', function()
+		return require('dap').terminate()
+	end, { desc = '[D]ebug [T]erminate' } },
+	{ { 'n' }, '<leader>dr', function()
+		return require('dap').restart()
+	end, { desc = '[D]ebug [R]estart' } },
+	{ { 'n' }, '<leader>dbt', function()
 		return require('dap').toggle_breakpoint()
-	end, { desc = "[D]ebug [B]reak[P]oint" } },
+	end, { desc = "[D]ebug [B]reakpoint [T]oggle" } },
+	{ { 'n' }, '<leader>dbC', function()
+		require('dap').set_breakpoint(
+			vim.fn.input({ prompt = "Enter breakpoint condition: " }))
+	end, { desc = "[D]ebug [B]reakpoint [C]onditional" } },
+	{ { 'n' }, '<leader>dbl', function()
+		require('dap').set_breakpoint(nil,nil,
+			vim.fn.input({ prompt = "Enter log message: " }))
+	end, { desc = "[D]ebug [B]reakpoint [L]og" } },
+	{ { 'n' }, '<leader>dbc', function()
+		return require('dap').clear_breakpoints()
+	end, { desc = "[D]ebug [B]reakpoint [c]lear (all)" } },
 	{ { 'n' }, '<leader>dc', function()
 		return require('dap').continue()
 	end, { desc = "[D]ebug [C]ontinue" } },
-	{ { 'n' }, '<leader>dsf', function()
-		return require('dap').step_into()
-	end, { desc = "[D]ebug [S]tep [F]orward" } },
-	{ { 'n' }, '<leader>dr', function()
-		return require('dap').repl.open()
-	end, { desc = "[D]ebug open [R]epl" } },
-	{ { 'n' }, '<leader>dr', function()
-		return require('dap').repl.open()
-	end, { desc = "[D]ebug open [R]epl" } },
+	{ 'n', '<leader>dso', function()
+		vim.ui.input({ prompt = 'Number of steps: ' }, function(input)
+			return require('dap').step_over({ count = input })
+		end)
+	end, { desc = '[D]ebug [S]tep [O]ver' } },
+	{ 'n', '<leader>dsi', function()
+		vim.ui.input({ prompt = 'Number of steps: ' }, function(input)
+			return require('dap').step_into({ count = input })
+		end)
+	end, { desc = '[D]ebug [S]tep [I]nto' } },
+	{ 'n', '<leader>dsc', function()
+		return require('dap').run_to_cursor()
+	end, { desc = '[D]ebug [S]tep to [C]ursor' } },
 
 	-------------------- fugitive/Git --------------------
 	-- <leader>g[key] reserved for fugitive/Git commands

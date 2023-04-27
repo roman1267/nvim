@@ -43,6 +43,11 @@ return require('packer').startup(function(use)
   --TODO: Configuration
   use 'mfussenegger/nvim-dap'
 
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" },
+    config = function()
+      require('dapui').setup()
+    end }
+
   use {
     "ellisonleao/gruvbox.nvim",
     config = function()
@@ -85,7 +90,9 @@ return require('packer').startup(function(use)
   use {
     'folke/neodev.nvim',
     config = function()
-      require('neodev').setup()
+      require('neodev').setup({
+        library = { plugins = { 'nvim-dap-ui' }, types = true },
+      })
     end
   }
 
