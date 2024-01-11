@@ -237,6 +237,7 @@ return {
    },
    {
       "windwp/nvim-autopairs",
+      enabled = false,
       lazy = true,
       event = "InsertEnter",
       config = require(cfgs .. "autopairs"),

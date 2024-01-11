@@ -19,7 +19,7 @@ local config = function()
    vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
       group = vim.api.nvim_create_augroup("nvim-lint-group", { clear = true }),
       callback = function()
-         require("lint").try_lint()
+         vim.cmd(':silent! lua require("lint").try_lint()')
       end,
    })
 end
