@@ -1,6 +1,6 @@
 local opts = {
    -- Add languages to be installed here that you want installed for treesitter
-   ensure_installed = { "lua", "python", "rust", "vim", "hypr" },
+   ensure_installed = { "lua", "python", "rust", "vim", "hyprlang" },
    highlight = { enable = true },
    indent = { enable = true, disable = { "python" } },
    incremental_selection = {
@@ -62,7 +62,7 @@ local setup = function()
    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
    parser_config.hypr = {
       install_info = {
-         url = "https://github.com/luckasRanarison/tree-sitter-hypr",
+         url = "https://github.com/luckasRanarison/tree-sitter-hyprlang",
          files = { "src/parser.c" },
          branch = "master",
       },

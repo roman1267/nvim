@@ -63,7 +63,7 @@ return {
       ft = "py",
    },
    {
-      "luckasRanarison/tree-sitter-hypr",
+      "luckasRanarison/tree-sitter-hyprlang",
       -- TODO: requires experimentation
       lazy = true,
       event = { "BufReadPost", "BufNewFile" },
@@ -71,6 +71,33 @@ return {
    {
       "simrat39/rust-tools.nvim",
       lazy = true,
+   },
+   {
+      "epwalsh/obsidian.nvim",
+      version = "*", -- recommended, use latest release instead of latest commit
+      lazy = true,
+      event = {
+         "BufReadPre " .. vim.fn.expand("~") .. "/OneDrive/Documents/roman-obsidian/**.md",
+         "BufNewFile " .. vim.fn.expand("~") .. "/OneDrive/Documents/roman-obsidian/**.md",
+      },
+      dependencies = {
+         -- Required.
+         "nvim-lua/plenary.nvim",
+
+         -- see below for full list of optional dependencies 👇
+      },
+      opts = {
+         -- workspaces = {
+         --    {
+         --       name = "personal",
+         --       path = "~/OneDrive/personal",
+         --    },
+         --    {
+         --       name = "work",
+         --       path = "~/vaults/work",
+         --    },
+         -- },
+      },
    },
    {
       "stevearc/conform.nvim",

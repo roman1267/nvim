@@ -40,6 +40,7 @@ opt.clipboard = "unnamedplus"
 opt.ignorecase = true
 
 opt.smartcase = true
+opt.conceallevel = 1
 -- Decrease update time
 
 g.updatetime = 250
