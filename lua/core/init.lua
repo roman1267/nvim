@@ -1,62 +1,40 @@
+---@diagnostic disable: assign-type-mismatch
 local opt = vim.opt
-local g = vim.g
+local o = vim.o
 
+-- # global options # --
+local g = vim.g
 g.mapleader = " "
 g.maplocalleader = " "
-
-g.vimspector_enable_mappings = "HUMAN"
--- Gives more color options
-opt.termguicolors = true
-
--- detect changes to file outside of neovim
-opt.autoread = true
-
--- Make line numbers default
 g.number = true
-
--- Enable mouse mode
-opt.mouse = "a"
-
--- Enable break indent
-opt.breakindent = true
-
--- Save undo history
-opt.undofile = true
-
--- Autoindentation
-opt.autoindent = false
-
--- Automatically change dir to dir of current file
-opt.autochdir = true
-
--- Relative line numbering
-opt.relativenumber = true
-opt.number = true
-
--- Sets clipboard to X11 systejm clipboard (requires xclip)
-opt.clipboard = "unnamedplus"
-
--- Case insensitive searching UNLESS /C or capital in search
-opt.ignorecase = true
-
-opt.smartcase = true
-opt.conceallevel = 1
--- Decrease update time
-
-g.updatetime = 250
-g.signcolumn = "yes"
-
 g.loaded_netrwPlugin = 1
 g.loaded_netrw = 1
--- Treesitter handles folds
-g.foldmethod = "expr"
-g.foldexpr = "nvim_treesitter#foldexpr()"
+g.undotree_SetFocusWhenToggle = 1
 
--- Set colorscheme
+-- # lua-style options # --
+opt.termguicolors = true
+opt.autoread = true
+opt.mouse = "a"
+opt.breakindent = true
+opt.tabstop = 2
+opt.expandtab = true
+opt.softtabstop = 2
+opt.shiftwidth = 2
+opt.undofile = true
+opt.autoindent = false
+opt.autochdir = true
+opt.relativenumber = true
+opt.number = true
+opt.clipboard = "unnamedplus"
+opt.ignorecase = true
+opt.smartcase = true
+opt.conceallevel = 1
 opt.termguicolors = true
 opt.background = "dark" -- or "light" for light mode
 opt.syntax = "on"
---vim.cmd.syntax("on")
-
--- Set completeopt to have a better completion experience
 opt.completeopt = "menuone,noselect"
+
+-- # Other Vim Options # --
+o.updatetime = 250
+o.foldmethod = "expr"
+o.foldexpr = "nvim_treesitter#foldexpr()"

@@ -38,9 +38,6 @@ local mappings = {
          expr = true,
          silent = true,
       } },
-      -- Remap for better scrolling
-      { "n", "<C-u>", "<C-u> zz" },
-      { "n", "<C-d>", "<C-d> zz" },
       -------------------- buffer options --------------------
       { { "n", "v" }, "<leader>bp", "<cmd> bprev <CR>", {
          desc = "[B]uffer [P]revious",
@@ -253,7 +250,15 @@ local mappings = {
          function()
             return require("telescope.builtin").keymaps()
          end,
-         { desc = "[F]ind [M]aps" },
+         { desc = "Telescope find keymaps" },
+      },
+      {
+         "n",
+         "<leader>f'",
+         function()
+            return require("telescope.builtin").marks()
+         end,
+         { desc = "Telescope find marks" },
       },
    },
    -------------------- treesitter --------------------
@@ -370,6 +375,25 @@ local mappings = {
       },
       { "n", "<leader>go", "<cmd>LazyGitFilter<CR>", { desc = "Lazy[G]it project c[O]mmits" } },
       { "n", "<leader>gb", "<cmd>LazyGitFilterCurrentFile<CR>", { desc = "Lazy[G]it [B]uffer commits" } },
+   },
+   -------------------- Obsidian --------------------
+   obsidian = {
+      { "n", "<leader>olb", "<cmd>ObsidianBackLinks<CR>", { desc = "[O]bsidian [L]inks [B]ack" } },
+      { "n", "<leader>oc", "<cmd>ObsidianCheck<CR>", { desc = "[O]bsidian [C]heck" } },
+      { "n", "<leader>olf", "<cmd>ObsidianFollowLink<CR>", { desc = "[O]bsidian [L]ink [F]ollow" } },
+      { "n", "<leader>ole", ":ObsidianLink ", { desc = "[O]bsidian [L]ink to [E]xisting" } },
+      { "n", "<leader>oln", ":ObsidianLinkNew ", { desc = "[O]bsidian [L]ink to [N]ew" } },
+      { "n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "[O]bsidian [O]pen" } },
+      { "n", "<leader>oi", "<cmd>ObsidianPasteImg<CR>", { desc = "[O]bsidian [P]aste [I]mg" } },
+      { "n", "<leader>oqs", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Switch to note" } },
+      { "n", "<leader>or", ":ObsidianRename ", { desc = "rename a file across the vault" } },
+      { "n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search | create notes in vault" } },
+      { "n", "<leader>ot", ":ObsidianTemplate ", { desc = "Paste template into buffer" } },
+      { "n", "<leader>ow", ":ObsidianWorkspace ", { desc = "Open a workspace" } },
+   },
+   -------------------- Undo Tree --------------------
+   undo_tree = {
+      { "n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "Toggle Undotree" } },
    },
    -------------------- others --------------------
 }

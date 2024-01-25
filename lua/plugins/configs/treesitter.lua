@@ -1,6 +1,6 @@
 local opts = {
    -- Add languages to be installed here that you want installed for treesitter
-   ensure_installed = { "lua", "python", "rust", "vim", "hyprlang" },
+   ensure_installed = { "lua", "python", "rust", "vim", "hyprlang", "markdown" },
    highlight = { enable = true },
    indent = { enable = true, disable = { "python" } },
    incremental_selection = {

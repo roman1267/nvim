@@ -36,7 +36,10 @@ return {
       build = "make install_jsregexp",
       lazy = true,
       config = function()
-         require("luasnip.loaders.from_vscode").lazy_load()
+         require("luasnip.loaders.from_vscode").lazy_load({
+            -- NOTE: Why won't the friendly-snippets load without explicity setting the path?
+            paths = { "~/.config/nvim/luasnippets", "~/.local/share/nvim/lazy/friendly-snippets" },
+         })
       end,
    },
    -- highlighting of code comments like 'HACK,' 'BUG,' etc.
@@ -59,6 +62,7 @@ return {
    },
    {
       "mfussenegger/nvim-dap-python",
+      dependencies = { "HiPhish/debugpy.nvim" },
       lazy = true,
       ft = "py",
    },
@@ -73,31 +77,41 @@ return {
       lazy = true,
    },
    {
+      "mbbill/undotree",
+      lazy = true,
+      cmd = { "UndotreeToggle", "UndotreeShow", "UndotreeHide", "UndotreeFocus", "UndotreePersistUndo" },
+      init = function()
+         vim.g.undotree_SetFocusWhenToggle = 1
+         require("core.utils").load_mappings("undo_tree")
+      end,
+   },
+   {
       "epwalsh/obsidian.nvim",
-      version = "*", -- recommended, use latest release instead of latest commit
+      version = "*",
+      dependencies = {
+         "nvim-lua/plenary.nvim",
+         "nvim-telescope/telescope.nvim",
+         "hrsh7th/nvim-cmp",
+         "nvim-treesitter",
+      },
       lazy = true,
       event = {
-         "BufReadPre " .. vim.fn.expand("~") .. "/OneDrive/Documents/roman-obsidian/**.md",
+         "BufReadPost " .. vim.fn.expand("~") .. "/OneDrive/Documents/roman-obsidian/**.md",
          "BufNewFile " .. vim.fn.expand("~") .. "/OneDrive/Documents/roman-obsidian/**.md",
       },
-      dependencies = {
-         -- Required.
-         "nvim-lua/plenary.nvim",
-
-         -- see below for full list of optional dependencies 👇
-      },
-      opts = {
-         -- workspaces = {
-         --    {
-         --       name = "personal",
-         --       path = "~/OneDrive/personal",
-         --    },
-         --    {
-         --       name = "work",
-         --       path = "~/vaults/work",
-         --    },
-         -- },
-      },
+      init = function()
+         require("core.utils").load_mappings("obsidian")
+      end,
+      config = function()
+         require("obsidian").setup({
+            workspaces = {
+               {
+                  name = "roman-obsidian",
+                  path = "/home/roman/OneDrive/Documents/roman-obsidian",
+               },
+            },
+         })
+      end,
    },
    {
       "stevearc/conform.nvim",
@@ -109,12 +123,12 @@ return {
       "ellisonleao/gruvbox.nvim",
       enabled = true,
       lazy = true,
-      -- event = 'VimEnter',
+      event = "VimEnter",
       config = require(cfgs .. "gruvbox"),
    },
    {
       "catppuccin/nvim",
-      enabled = true,
+      enabled = false,
       lazy = true,
       event = "VimEnter",
       config = function()
@@ -304,7 +318,7 @@ return {
    {
       "folke/which-key.nvim",
       lazy = true,
-      keys = { '"', "`", "d", "y", "g", "v", "z", "c", "<leader>" },
+      keys = { '"', "`", "d", "y", "g", "v", "z", "c", "<c-w>", "!", "[", "]", "<leader>" },
       config = require(cfgs .. "which-key"),
    },
 }

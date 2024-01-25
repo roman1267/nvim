@@ -31,7 +31,7 @@ local config = function()
          program = "${file}",
       },
    }
-   require("dap-python").setup("/usr/bin/python")
+   require("dap-python").setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
 end
 
 return function()
