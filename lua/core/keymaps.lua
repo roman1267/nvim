@@ -13,8 +13,6 @@ local mappings = {
       { { "n", "v", "i" }, "<Esc>", "<Esc><cmd>nohl<CR>", {
          desc = "Clear highlights",
       } },
-      { { "c" }, "Q", "q!" },
-      --{ 'c',          'W',          'wq' },
       { { "n" }, "<leader>hi", "<cmd>edit ~/.config/nvim/init.lua<CR>", { desc = "go to init.lua" } },
       {
          { "n" },

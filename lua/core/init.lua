@@ -1,6 +1,4 @@
 ---@diagnostic disable: assign-type-mismatch
-local opt = vim.opt
-local o = vim.o
 
 -- # global options # --
 local g = vim.g
@@ -12,6 +10,7 @@ g.loaded_netrw = 1
 g.undotree_SetFocusWhenToggle = 1
 
 -- # lua-style options # --
+local opt = vim.opt
 opt.termguicolors = true
 opt.autoread = true
 opt.mouse = "a"
@@ -30,11 +29,10 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.conceallevel = 1
 opt.termguicolors = true
-opt.background = "dark" -- or "light" for light mode
-opt.syntax = "on"
 opt.completeopt = "menuone,noselect"
 
 -- # Other Vim Options # --
+local o = vim.o
 o.updatetime = 250
 o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
