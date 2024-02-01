@@ -20,7 +20,7 @@ local lazyopts = {
    },
 }
 
-require("core.init")
+require("core.settings")
 require("lazy").setup("plugins", lazyopts)
 require("core.keymaps")
 require("core.autocmd")

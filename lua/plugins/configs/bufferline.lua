@@ -94,9 +94,9 @@ local opts = {
    },
    highlights = {
       fill = {
-         -- Catppuccin colors
-         fg = "#262626",
-         bg = "#1e2030",
+         -- colors
+         fg = "#928374",
+         bg = "#262626",
       },
       -- offset_separator = {
       --   fg = '#665c54',
