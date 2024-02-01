@@ -10,7 +10,7 @@ end
 
 utils.lazy_load = function(plugin, opts)
    -- some plugins' lazy-loading does not work when scheduled
-   if plugin ~= "nvim-treesitter.configs" and plugin ~= "nvim-tree" and plugin ~= "which-key" then
+   if plugin ~= "nvim-tree" and plugin ~= "which-key" then
       vim.schedule(function()
          require(plugin).setup(opts)
       end)

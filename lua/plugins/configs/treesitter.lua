@@ -1,6 +1,8 @@
+---@diagnostic disable: redefined-local
 local opts = {
    -- Add languages to be installed here that you want installed for treesitter
-   ensure_installed = { "lua", "python", "rust", "vim", "hyprlang", "markdown" },
+   ensure_installed = { "lua", "python", "rust", "vim", "hyprlang", "markdown", "c", "query", "vimdoc" },
+   auto_install = true,
    highlight = { enable = true },
    indent = { enable = true, disable = { "python" } },
    incremental_selection = {
@@ -58,7 +60,7 @@ local opts = {
    },
 }
 
-local setup = function()
+return function()
    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
    parser_config.hypr = {
       install_info = {
@@ -68,20 +70,5 @@ local setup = function()
       },
       filetype = "hypr",
    }
-   if type(opts.ensure_installed) == "table" then
-      ---@type table<string, boolean>
-      local added = {}
-      opts.ensure_installed = vim.tbl_filter(function(lang)
-         if added[lang] then
-            return false
-         end
-         added[lang] = true
-         return true
-      end, opts.ensure_installed)
-   end
-end
-
-return function()
-   setup()
    require("core.utils").lazy_load("nvim-treesitter.configs", opts)
 end
