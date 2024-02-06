@@ -3,12 +3,10 @@ return {
    {
       "nvim-tree/nvim-web-devicons",
       enabled = true,
-      lazy = true,
    },
    {
       "nvim-treesitter/nvim-treesitter",
       dependencies = { "nvim-treesitter/nvim-treesitter-context", "nvim-treesitter/nvim-treesitter-textobjects" },
-      lazy = true,
       event = { "UIEnter" },
       build = function()
          pcall(require("nvim-treesitter.install").update({ with_sync = true }))
@@ -16,25 +14,22 @@ return {
       init = function(plugin)
          require("lazy.core.loader").add_to_rtp(plugin)
          require("nvim-treesitter.query_predicates")
-         require("core/utils").load_mappings("treesitter")
+         require("core.utils").load_mappings("treesitter")
       end,
       config = require(cfgs .. "treesitter"),
    },
    {
       -- Additional text objects via treesitter
       "nvim-treesitter/nvim-treesitter-textobjects",
-      lazy = true,
    },
    {
       "elkowar/yuck.vim",
-      lazy = true,
       ft = { "yuck" },
    },
    {
       "L3MON4D3/LuaSnip",
       dependencies = { "rafamadriz/friendly-snippets" },
       build = "make install_jsregexp",
-      lazy = true,
       config = function()
          require("luasnip.loaders.from_vscode").lazy_load({
             -- NOTE: Why won't the friendly-snippets load without explicity setting the path?
@@ -46,10 +41,9 @@ return {
    {
       "folke/todo-comments.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
-      lazy = true,
-      event = { "VeryLazy" },
+      event = { "BufReadPost" },
       init = function()
-         require("core/utils").load_mappings("todo_comments")
+         require("core.utils").load_mappings("todo_comments")
       end,
       opts = function()
          require("todo-comments").setup()
@@ -57,28 +51,23 @@ return {
    },
    {
       "HiPhish/debugpy.nvim",
-      lazy = true,
-      ft = "py",
+      ft = "python",
    },
    {
       "mfussenegger/nvim-dap-python",
       dependencies = { "HiPhish/debugpy.nvim" },
-      lazy = true,
-      ft = "py",
+      ft = "python",
    },
    {
       "luckasRanarison/tree-sitter-hyprlang",
       -- TODO: requires experimentation
-      lazy = true,
       event = { "BufReadPost", "BufNewFile" },
    },
    {
       "simrat39/rust-tools.nvim",
-      lazy = true,
    },
    {
       "mbbill/undotree",
-      lazy = true,
       cmd = { "UndotreeToggle", "UndotreeShow", "UndotreeHide", "UndotreeFocus", "UndotreePersistUndo" },
       init = function()
          vim.g.undotree_SetFocusWhenToggle = 1
@@ -94,7 +83,6 @@ return {
          "hrsh7th/nvim-cmp",
          "nvim-treesitter",
       },
-      lazy = true,
       event = {
          "BufReadPost " .. vim.fn.expand("~") .. "/OneDrive/Documents/roman-obsidian/**.md",
          "BufNewFile " .. vim.fn.expand("~") .. "/OneDrive/Documents/roman-obsidian/**.md",
@@ -119,21 +107,79 @@ return {
    },
    {
       "stevearc/conform.nvim",
-      lazy = true,
       event = "VeryLazy",
       config = require(cfgs .. "conform"),
    },
    {
+      "jakewvincent/mkdnflow.nvim",
+      ft = "markdown",
+      config = function()
+         require("core.utils").load_mappings("mkdnflow")
+         require("mkdnflow").setup({
+            -- NOTE: Probably don't set maps here
+            mappings = {
+               MkdnEnter = false,
+               MkdnTab = false,
+               MkdnSTab = false,
+               MkdnNextLink = false,
+               MkdnPrevLink = false,
+               MkdnNextHeading = false,
+               MkdnPrevHeading = false,
+               MkdnGoBack = false,
+               MkdnGoForward = false,
+               MkdnCreateLink = false, -- see MkdnEnter
+               MkdnCreateLinkFromClipboard = false,
+               MkdnFollowLink = false, -- see MkdnEnter
+               MkdnDestroyLink = false,
+               MkdnTagSpan = false,
+               MkdnMoveSource = false,
+               MkdnYankAnchorLink = false,
+               MkdnYankFileAnchorLink = false,
+               MkdnIncreaseHeading = false,
+               MkdnDecreaseHeading = false,
+               MkdnToggleToDo = false,
+               MkdnNewListItem = false,
+               MkdnNewListItemBelowInsert = false,
+               MkdnNewListItemAboveInsert = false,
+               MkdnExtendList = false,
+               MkdnUpdateNumbering = false,
+               MkdnTableNextCell = false,
+               MkdnTablePrevCell = false,
+               MkdnTableNextRow = false,
+               MkdnTablePrevRow = false,
+               MkdnTableNewRowBelow = false,
+               MkdnTableNewRowAbove = false,
+               MkdnTableNewColAfter = false,
+               MkdnTableNewColBefore = false,
+               MkdnFoldSection = false,
+               MkdnUnfoldSection = false,
+            },
+         })
+      end,
+   },
+   {
+      "lukas-reineke/headlines.nvim",
+      dependencies = "nvim-treesitter/nvim-treesitter",
+      ft = "markdown",
+      config = true,
+   },
+   {
       "ellisonleao/gruvbox.nvim",
       enabled = true,
-      lazy = true,
       event = "VimEnter",
       config = require(cfgs .. "gruvbox"),
    },
    {
+      "sainnhe/gruvbox-material",
+      enabled = false,
+      event = "VimEnter",
+      config = function()
+         vim.cmd("colorscheme gruvbox-material")
+      end,
+   },
+   {
       "catppuccin/nvim",
       enabled = false,
-      lazy = true,
       event = "VimEnter",
       config = function()
          vim.cmd.colorscheme("catppuccin-macchiato")
@@ -141,7 +187,6 @@ return {
    },
    {
       "mfussenegger/nvim-dap",
-      lazy = true,
       event = "VeryLazy",
       init = function()
          require("core.utils").load_mappings("nvim_dap")
@@ -150,18 +195,15 @@ return {
    },
    {
       "mfussenegger/nvim-lint",
-      lazy = true,
    },
    {
       "rshkarin/mason-nvim-lint",
       dependencies = "mfussenegger/nvim-lint",
-      lazy = true,
       event = "LspAttach",
       config = require(cfgs .. "nvim-lint"),
    },
    {
       "rcarriga/nvim-dap-ui",
-      lazy = true,
       event = "VeryLazy",
       dependencies = { "mfussenegger/nvim-dap" },
       opts = function()
@@ -170,18 +212,16 @@ return {
    },
    {
       "nvim-tree/nvim-tree.lua",
-      lazy = true,
       cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen" },
       init = function()
-         require("core/utils").load_mappings("nvim_tree")
+         require("core.utils").load_mappings("nvim_tree")
       end,
       config = require(cfgs .. "nvim-tree"),
    },
    {
       "NvChad/nvterm",
-      lazy = true,
       init = function()
-         require("core/utils").load_mappings("nvterm")
+         require("core.utils").load_mappings("nvterm")
       end,
       config = require(cfgs .. "nvterm"),
    },
@@ -190,16 +230,14 @@ return {
       branch = "0.1.x",
       dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
       init = function()
-         require("core/utils").load_mappings("telescope")
+         require("core.utils").load_mappings("telescope")
       end,
-      lazy = true,
       cmd = { "Telescope", "TodoTelescope" },
       config = require(cfgs .. "telescope"),
    },
    {
       "williamboman/mason.nvim",
       build = ":MasonUpdate",
-      lazy = true,
       cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
       config = function()
          require("mason").setup()
@@ -211,30 +249,25 @@ return {
          "williamboman/mason.nvim",
          "hrsh7th/nvim-cmp",
       },
-      lazy = true,
       config = require(cfgs .. "mason-lspconfig"),
    },
    {
       "RRethy/vim-illuminate", -- automatic reference highlighting
       enabled = false,
-      lazy = true,
    },
    -- TODO: Set this up to work properly
    {
       "folke/neodev.nvim",
-      lazy = true,
       config = require(cfgs .. "neodev"),
    },
    {
       "nvim-lualine/lualine.nvim",
-      lazy = true,
       event = "VeryLazy",
       config = require(cfgs .. "lualine"),
    },
    {
       -- LSP Configuration & Plugins
       "neovim/nvim-lspconfig",
-      lazy = true,
       event = { "BufReadPost", "BufNewFile" },
       dependencies = {
          "williamboman/mason.nvim",
@@ -250,26 +283,22 @@ return {
    {
       "tpope/vim-fugitive",
       enabled = false,
-      lazy = true,
    },
    {
       "kdheepak/lazygit.nvim",
-      lazy = true,
       event = "VeryLazy",
       init = function()
-         require("core/utils").load_mappings("lazygit")
+         require("core.utils").load_mappings("lazygit")
       end,
    },
    {
       "lewis6991/gitsigns.nvim",
-      lazy = true,
       ft = "gitcommit",
       opts = require(cfgs .. "gitsigns"),
    },
    -- Add indentation guides even on blank lines
    {
       "lukas-reineke/indent-blankline.nvim",
-      lazy = true,
       event = "VeryLazy",
       main = "ibl",
       opts = function()
@@ -283,26 +312,22 @@ return {
    {
       "windwp/nvim-autopairs",
       enabled = false,
-      lazy = true,
       event = "InsertEnter",
       config = require(cfgs .. "autopairs"),
    },
    {
       "akinsho/bufferline.nvim",
-      lazy = true,
       event = { "VeryLazy" },
       config = require(cfgs .. "bufferline"),
    },
    {
       "nvim-treesitter/nvim-treesitter-context",
-      lazy = true,
       config = function(_, opts)
          require("treesitter-context").setup(opts)
       end,
    },
    {
       "numToStr/Comment.nvim",
-      lazy = true,
       event = { "VeryLazy" },
       config = function()
          require("Comment").setup()
@@ -310,18 +335,15 @@ return {
    },
    {
       "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-      lazy = true,
       event = { "BufReadPre", "BufNewFile" },
    },
    {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
       cond = vim.fn.executable("make") == 1,
-      lazy = true,
    },
    {
       "folke/which-key.nvim",
-      lazy = true,
       keys = { '"', "`", "d", "y", "g", "v", "z", "c", "<c-w>", "!", "[", "]", "<leader>" },
       config = require(cfgs .. "which-key"),
    },

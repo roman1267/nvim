@@ -11,9 +11,15 @@ local config = function()
       lua_ls = {},
    }
 
+   local words = {}
+   for word in io.open("/home/roman/.config/nvim/extra/spell/en.UTF-8.add"):lines() do
+      table.insert(words, word)
+   end
+
    require("mason-lspconfig").setup({
       ensure_installed = vim.tbl_keys(servers),
    })
+
    require("mason-lspconfig").setup_handlers({
       -- Custom handlers for specific servers
       ["rust_analyzer"] = function()
@@ -48,10 +54,10 @@ local config = function()
       end,
       ["lua_ls"] = function()
          require("lazy").load({ plugins = "neodev.nvim" })
-         require("lspconfig").lua_ls.setup({
+         require("lspconfig")["lua_ls"].setup({
             settings = {
                Lua = {
-                  workspace = { checkThirdParty = false },
+                  workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
                   telemetry = { enable = false },
                   diagnostics = {
                      globals = { "vim" },
@@ -60,6 +66,29 @@ local config = function()
             },
          })
       end,
+      ["ltex"] = function()
+         require("lspconfig").ltex.setup({
+            capabilities = capabilities,
+            settings = {
+               ltex = {
+                  enabled = { "latex", "tex", "bib", "markdown", "md" },
+                  language = "en-US",
+                  diagnosticSeverity = "hint", -- error, warning, information, hint
+                  sentenceCacheSize = 2000,
+                  additionalRules = {
+                     enablePickyRules = true,
+                     motherTongue = "en-US",
+                  },
+                  trace = { server = "verbose" },
+                  dictionary = {
+                     ["en-US"] = words,
+                  },
+                  hiddenFalsePositives = {},
+               },
+            },
+         })
+      end,
+
       function(server_name) -- default handler
          require("lspconfig")[server_name].setup({
             capabilities = capabilities,
