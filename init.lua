@@ -18,10 +18,10 @@ local lazyopts = {
       enabled = true,
       notify = false, -- get a notification when changes are found
    },
+   defaults = { lazy = true },
 }
 
 require("core.settings")
 require("lazy").setup("plugins", lazyopts)
 require("core.keymaps")
 require("core.autocmd")
-require("extra")
