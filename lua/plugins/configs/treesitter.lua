@@ -1,9 +1,20 @@
 ---@diagnostic disable: redefined-local
 local opts = {
    -- Add languages to be installed here that you want installed for treesitter
-   ensure_installed = { "lua", "python", "rust", "vim", "hyprlang", "markdown", "c", "query", "vimdoc" },
+   ensure_installed = {
+      "lua",
+      "python",
+      "rust",
+      "vim",
+      "hyprlang",
+      "markdown",
+      "markdown_inline",
+      "c",
+      "query",
+      "vimdoc",
+   },
    auto_install = true,
-   highlight = { enable = true },
+   highlight = { enable = true, disable = { "markdown" } },
    indent = { enable = true, disable = { "python" } },
    incremental_selection = {
       enable = true,

@@ -22,6 +22,6 @@ local opts = {
 }
 
 return function()
-   require("gruvbox").setup(opts)
+   require("core.utils").lazy_load("gruvbox", opts)
    vim.cmd.colorscheme("gruvbox")
 end
