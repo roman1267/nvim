@@ -59,8 +59,56 @@ local mappings = {
          { "n", "v" },
          "<leader>bq",
          function()
+            local bufnr = function()
+               local buffers = {}
+               ---@diagnostic disable-next-line: param-type-mismatch
+               for buffer = 1, vim.fn.bufnr("$") do
+                  local is_listed = vim.fn.buflisted(buffer) == 1
+                  if is_listed then
+                     table.insert(buffers, buffer)
+                  end
+               end
+               return #buffers
+            end
+
             vim.cmd("bd %")
-            vim.cmd("bp")
+            if bufnr() == 0 then
+               vim.cmd(":qall")
+            else
+               vim.cmd("bp")
+            end
+         end,
+         { desc = "[B]uffer [Q]uit" },
+      },
+      {
+         { "n", "v" },
+         "\\q",
+         function()
+            local bufnr = function()
+               local buffers = {}
+               ---@diagnostic disable-next-line: param-type-mismatch
+               for buffer = 1, vim.fn.bufnr("$") do
+                  local is_listed = vim.fn.buflisted(buffer) == 1
+                  if is_listed then
+                     table.insert(buffers, buffer)
+                  end
+               end
+               return #buffers
+            end
+
+            vim.cmd("bd %")
+            if bufnr() == 1 then
+               local function is_no_name_buf(buf)
+                  return vim.api.nvim_buf_is_loaded(buf)
+                     and vim.api.nvim_buf_get_option(buf, "buflisted")
+                     and vim.api.nvim_buf_get_name(buf) == ""
+                     and vim.api.nvim_buf_get_option(buf, "buftype") == ""
+                     and vim.api.nvim_buf_get_option(buf, "filetype") == ""
+               end
+               vim.cmd(":qall")
+            else
+               vim.cmd("bp")
+            end
          end,
          { desc = "[B]uffer [Q]uit" },
       },
@@ -393,7 +441,16 @@ local mappings = {
    undo_tree = {
       { "n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "Toggle Undotree" } },
    },
-   -------------------- others --------------------
+   -------------------- Mkdnflow --------------------
+   mkdnflow = {
+      -- TODO: fix descs
+      { "i", "<CR>", "<cmd>MkdnNewListItem<CR>", { desc = "Creates a new list item" } },
+      { "n", "<CR>", "<cmd>MkdnNewListItemBelowInsert<CR>", { desc = "Creates a new list item" } },
+      { "n", "o", "<cmd>MkdnNewListItemBelowInsert<CR>", { desc = "Creates a new list item" } },
+      { "n", "+", "<cmd>MkdnIncreaseHeading<CR>", { desc = "Increase md heading" } },
+      { "n", "-", "<cmd>MkdnDecreaseHeading<CR>", { desc = "Decrease md heading" } },
+      { "n", "<M-CR>", "<cmd>MkdnToggleToDo<CR>", { desc = "Toggle md todo" } },
+   },
 }
 
 return mappings
