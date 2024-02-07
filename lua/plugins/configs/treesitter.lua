@@ -12,6 +12,7 @@ local opts = {
       "c",
       "query",
       "vimdoc",
+      "yuck",
    },
    auto_install = true,
    highlight = { enable = true, disable = { "markdown" } },
