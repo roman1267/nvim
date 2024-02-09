@@ -57,7 +57,7 @@ local mappings = {
       } },
       {
          { "n", "v" },
-         "<leader>bq",
+         "\\b",
          function()
             local bufnr = function()
                local buffers = {}
@@ -71,44 +71,27 @@ local mappings = {
                return #buffers
             end
 
-            vim.cmd("bd %")
-            if bufnr() == 0 then
-               vim.cmd(":qall")
-            else
-               vim.cmd("bp")
+            local last_buf = vim.fn.bufnr("%")
+            local last_buf_name = vim.api.nvim_buf_get_name(last_buf)
+            if bufnr() == 1 and string.find(last_buf_name, "NvimTree") == nil then
+               vim.cmd("qall")
+            end
+
+            vim.cmd("bn")
+            vim.cmd(string.format("silent! bd %s", last_buf))
+
+            if bufnr() == 1 then
+               vim.cmd("silent! NvimTreeClose")
+               vim.cmd("silent! close")
             end
          end,
-         { desc = "[B]uffer [Q]uit" },
+         { desc = "Intelligently close current buffer" },
       },
       {
          { "n", "v" },
          "\\q",
          function()
-            local bufnr = function()
-               local buffers = {}
-               ---@diagnostic disable-next-line: param-type-mismatch
-               for buffer = 1, vim.fn.bufnr("$") do
-                  local is_listed = vim.fn.buflisted(buffer) == 1
-                  if is_listed then
-                     table.insert(buffers, buffer)
-                  end
-               end
-               return #buffers
-            end
-
-            vim.cmd("bd %")
-            if bufnr() == 1 then
-               local function is_no_name_buf(buf)
-                  return vim.api.nvim_buf_is_loaded(buf)
-                     and vim.api.nvim_buf_get_option(buf, "buflisted")
-                     and vim.api.nvim_buf_get_name(buf) == ""
-                     and vim.api.nvim_buf_get_option(buf, "buftype") == ""
-                     and vim.api.nvim_buf_get_option(buf, "filetype") == ""
-               end
-               vim.cmd(":qall")
-            else
-               vim.cmd("bp")
-            end
+            vim.cmd(":qall")
          end,
          { desc = "[B]uffer [Q]uit" },
       },
