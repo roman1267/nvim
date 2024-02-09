@@ -340,7 +340,7 @@ return {
    },
    {
       "folke/which-key.nvim",
-      keys = { '"', "`", "d", "y", "g", "v", "z", "c", "<c-w>", "!", "[", "]", "<leader>" },
+      keys = { '"', "`", "d", "y", "g", "v", "z", "c", "<c-w>", "<c-r>", "!", "[", "]", "<leader>" },
       config = require(cfgs .. "which-key"),
    },
 }
