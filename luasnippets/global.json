@@ -1,9 +1,0 @@
-{
-  "copyright": {
-    "prefix": "test",
-    "body": [
-      "Copyright (c) ${CURRENT_YEAR} ${0:Author}. All Rights Reserved."
-    ],
-    "description": "Test to put copyright"
-  }
-}
