@@ -108,22 +108,24 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -------------------- file-sourcing augroup --------------------
 local file_sourcing_group = vim.api.nvim_create_augroup("file_sourcing_group", { clear = true })
 -- Automatically source tmux config after making changes to it
--- vim.api.nvim_create_autocmd("BufWritePost", {
--- 	pattern = "/home/romanm/.config/tmux/tmux.conf",
--- 	command = "silent! !tmux source-file /home/romanm/.config/tmux/tmux.conf",
--- 	group = file_sourcing_group,
--- })
+
+local tmux_file = vim.env.XDG_CONFIG_HOME .. "tmux/tmux.conf"
+vim.api.nvim_create_autocmd("BufWritePost", {
+   pattern = tmux_file,
+   command = "silent !tmux source-file " .. tmux_file,
+   group = file_sourcing_group,
+})
 
 -- Automatically source tmux config after making changes to it
 vim.api.nvim_create_autocmd("BufWritePost", {
    pattern = "/home/romanm/.config/bspwm/bspwmrc",
-   command = "silent! !bspc wm -r",
+   command = "silent !bspc wm -r",
    group = file_sourcing_group,
 })
 
 vim.api.nvim_create_autocmd("BufWritePost", {
    pattern = "/home/romanm/.config/dunst/dunstrc",
-   command = "silent! !killall dunst",
+   command = "silent !killall dunst",
    group = file_sourcing_group,
 })
 
