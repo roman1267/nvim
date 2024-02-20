@@ -1,6 +1,6 @@
 local ft_cmds = {
-   python = "python3 " .. vim.fn.expand("%"),
-   rust = "bacon",
+   python = "python3 " .. vim.fn.shellescape(vim.fn.expand("%:p")),
+   rust = "bacon " .. vim.fn.shellescape(vim.fn.expand("%:p:h")),
 }
 
 local mappings = {
@@ -150,13 +150,13 @@ local mappings = {
    nvterm = {
       {
          "n",
-         "<C-l>",
+         "<C-m>",
          function()
-            require("nvterm.terminal").send(ft_cmds[vim.bo.filetype])
+            require("nvterm.terminal").send(ft_cmds[vim.bo.filetype], "vertical")
          end,
          {
             noremap = true,
-            silent = true,
+            silent = false,
          },
       },
       --{ toggle_modes, '<A-v>', function () terminal.toggle('vertical') end },
