@@ -73,7 +73,9 @@ local mappings = {
 
             local last_buf = vim.fn.bufnr("%")
             local last_buf_name = vim.api.nvim_buf_get_name(last_buf)
-            if bufnr() == 1 and string.find(last_buf_name, "NvimTree") == nil then
+            if bufnr() == 1 and vim.fn.buflisted(vim.fn.expand("%")) == 0 then
+               vim.cmd("bd")
+            elseif bufnr() == 1 and string.find(last_buf_name, "NvimTree") == nil then
                vim.cmd("qall")
             end
 
