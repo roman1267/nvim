@@ -14,12 +14,11 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 })
 -------------------- File-Specific augroup --------------------
 local file_specific_group = vim.api.nvim_create_augroup("file_specific", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("BufWritePost", {
    group = file_specific_group,
-   pattern = "*.md",
+   pattern = "/home/roman/OneDrive/Other/Games/game_list.md",
    callback = function()
-      -- require('pandoc.render').init {
-      -- }
+      vim.cmd("silent !cp % ~/Templates/")
    end,
 })
 -------------------- LSP augroup --------------------
