@@ -36,3 +36,18 @@ vim.opt.spellfile = vim.fn.stdpath("config") .. "/extra/spell/en.UTF-8.add"
 vim.o.updatetime = 250
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+
+-- # Custom Options # --
+package.path = "/home/romanm/.config/nvim/?.lua;" .. package.path
+local custom_options = {
+   lazy_opts = {
+      change_detection = {
+         -- automatically check for config file changes and reload the ui
+         enabled = true,
+         notify = false, -- get a notification when changes are found
+      },
+      defaults = { lazy = true },
+   },
+}
+
+return custom_options
