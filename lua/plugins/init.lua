@@ -37,7 +37,7 @@ return {
    {
       "folke/todo-comments.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
-      event = { "BufReadPost" },
+      event = { "BufReadPre", "BufNewFile" },
       init = function()
          require("core.utils").load_mappings("todo_comments")
       end,
