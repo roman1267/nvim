@@ -3,25 +3,80 @@ local config = function()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-    local servers = {
-        rust_analyzer = {},
-        bashls = {},
-        html = {},
-        pylsp = {},
-        lua_ls = {},
-    }
-
     local words = {}
     for word in io.open("/home/roman/.config/nvim/extra/spell/en.UTF-8.add"):lines() do
         table.insert(words, word)
     end
+
+    local script_dir = vim.fn.expand("$XDG_CONFIG_HOME") .. "nvim/extra/lsp/"
+
+    local servers = {
+        rust_analyzer = {},
+        bashls = {},
+        html = {},
+        pylsp = {
+            pylsp = {
+                plugins = {
+                    pydocstyle = {
+                        enabled = false,
+                    },
+                    pyflakes = {
+                        enabled = false,
+                    },
+                    pylint = {
+                        enabled = false,
+                    },
+                    yapf = {
+                        enabled = false,
+                    },
+                    autopep8 = {
+                        enabled = false,
+                    },
+                    flake8 = {
+                        enabled = false,
+                    },
+                    mccabe = {
+                        enabled = false,
+                    },
+                    pycodestyle = {
+                        enabled = false,
+                    },
+                },
+            },
+        },
+        lua_ls = {
+            lua = {
+                workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
+                telemetry = { enable = false },
+                diagnostics = {
+                    globals = { "vim" },
+                },
+            },
+        },
+        ltex = {
+            ltex = {
+                enabled = { "latex", "tex", "bib", "markdown", "md" },
+                language = "en-US",
+                diagnosticSeverity = "hint", -- error, warning, information, hint
+                sentenceCacheSize = 2000,
+                additionalRules = {
+                    enablePickyRules = true,
+                    motherTongue = "en-US",
+                },
+                trace = { server = "verbose" },
+                dictionary = {
+                    ["en-US"] = words,
+                },
+                hiddenFalsePositives = {},
+            },
+        },
+    }
 
     require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
     })
 
     require("mason-lspconfig").setup_handlers({
-        -- Custom handlers for specific servers
         ["rust_analyzer"] = function()
             require("rust-tools").setup({
                 inlay_hints = {
@@ -55,35 +110,16 @@ local config = function()
         ["lua_ls"] = function()
             require("lazy").load({ plugins = "neodev.nvim" })
             require("lspconfig")["lua_ls"].setup({
-                settings = {
-                    Lua = {
-                        workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
-                        telemetry = { enable = false },
-                        diagnostics = {
-                            globals = { "vim" },
-                        },
-                    },
-                },
+                capabilities = capabilities,
+                settings = servers["lua_ls"],
             })
         end,
         ["ltex"] = function()
-            require("lspconfig").ltex.setup({
+            require("lspconfig")["ltex"].setup({
                 capabilities = capabilities,
-                settings = {
-                    ltex = {
-                        enabled = { "latex", "tex", "bib", "markdown", "md" },
-                        language = "en-US",
-                        diagnosticSeverity = "hint", -- error, warning, information, hint
-                        sentenceCacheSize = 2000,
-                        additionalRules = {
-                            enablePickyRules = true,
-                            motherTongue = "en-US",
-                        },
-                        trace = { server = "verbose" },
-                        dictionary = {
-                            ["en-US"] = words,
-                        },
-                        hiddenFalsePositives = {},
+                settings = servers["ltex"],
+            })
+        end,
                     },
                 },
             })
