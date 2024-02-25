@@ -120,6 +120,15 @@ local config = function()
                 settings = servers["ltex"],
             })
         end,
+        ["pylsp"] = function()
+            require("lspconfig")["pylsp"].setup({
+                capabilities = capabilities,
+                settings = servers["pylsp"],
+            })
+            require("lspconfig").ruff_lsp.setup({
+                init_options = {
+                    settings = {
+                        args = {},
                     },
                 },
             })
