@@ -59,7 +59,8 @@ local mappings = {
             { "n", "v" },
             "\\b",
             function()
-                local bufnr = function()
+                -- Gets the number of listed buffers open
+                local listed_bufnr = function()
                     local buffers = {}
                     ---@diagnostic disable-next-line: param-type-mismatch
                     for buffer = 1, vim.fn.bufnr("$") do
@@ -71,20 +72,25 @@ local mappings = {
                     return #buffers
                 end
 
-                local last_buf = vim.fn.bufnr("%")
-                local last_buf_name = vim.api.nvim_buf_get_name(last_buf)
-                if bufnr() >= 1 and not vim.fn.buflisted(vim.fn.expand("%")) then
-                    vim.cmd("bd")
-                elseif bufnr() == 1 and string.find(last_buf_name, "NvimTree") == nil then
-                    vim.cmd("qall")
-                end
+                ---@diagnostic disable-next-line: param-type-mismatch
+                local current_buf = vim.fn.bufnr("%")
 
-                vim.cmd("bn")
-                vim.cmd(string.format("silent! bd %s", last_buf))
-
-                if bufnr() == 1 then
-                    vim.cmd("silent! NvimTreeClose")
-                    vim.cmd("silent! close")
+                if listed_bufnr() > 1 then
+                    ---@diagnostic disable-next-line: param-type-mismatch
+                    if vim.fn.buflisted(current_buf) == 0 then
+                        vim.cmd("bd " .. current_buf)
+                    else
+                        vim.cmd("bd " .. current_buf)
+                        vim.cmd("bn")
+                    end
+                elseif listed_bufnr() == 1 then
+                    ---@diagnostic disable-next-line: param-type-mismatch
+                    if vim.fn.buflisted(current_buf) == 0 then
+                        vim.cmd("bd " .. current_buf)
+                        vim.cmd("bn")
+                    else
+                        vim.cmd("qall")
+                    end
                 end
             end,
             { desc = "Intelligently close current buffer" },
@@ -103,9 +109,14 @@ local mappings = {
         { "n", "<leader>sv", "<cmd>vsp #<CR>", {
             desc = "[S]plit previous buffer [V]ertically",
         } },
-        { "n", "<leader>sh", "<cmd>sp #<CR>", {
-            desc = "[S]plit previous buffer [H]orizontally",
-        } },
+        {
+            "n",
+            "<leader>sh",
+            "<cmd>sp #<CR>",
+            {
+                desc = "[S]plit previous buffer [H]orizontally",
+            },
+        },
         { "n", "<leader>so", "<cmd>only<CR>", {
             desc = "keep current [S]plit [O]nly",
         } },
@@ -309,6 +320,14 @@ local mappings = {
                 return require("dapui").toggle()
             end,
             { desc = "[D]ebug toggle [U]I" },
+        },
+        {
+            { "n" },
+            "<leader>dk",
+            function()
+                return require("dapui").eval()
+            end,
+            { desc = "Hover information for current expression" },
         },
         {
             { "n" },
