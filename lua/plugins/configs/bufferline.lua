@@ -19,13 +19,6 @@ local opts = {
         close_icon = "",
         left_trunc_marker = "",
         right_trunc_marker = "",
-        -- name_formatter = function(buf)  -- buf contains:
-        --   -- name                | str        | the basename of the active file
-        --   -- path                | str        | the full path of the active file
-        --   -- bufnr (buffer only) | int        | the number of the active buffer
-        --   -- buffers (tabs only) | table(int) | the numbers of the buffers in the tab
-        --   -- tabnr (tabs only)   | int        | the "handle" of the tab, can be converted to its ordinal number using: `vim.api.nvim_tabpage_get_number(buf.tabnr)`
-        -- end,
         max_name_length = 18,
         max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
         truncate_names = true, -- whether or not tab names should be truncated
@@ -33,6 +26,8 @@ local opts = {
         diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc"
         diagnostics_update_in_insert = false,
         -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
+        -- luacheck: ignore 212
+        ---@diagnostic disable-next-line: unused-local
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             return "(" .. count .. ")"
         end,
@@ -90,7 +85,7 @@ local opts = {
             delay = 200,
             reveal = { "close" },
         },
-        sort_by = "insert_at_end", -- 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+        sort_by = "insert_at_end",
     },
     highlights = {
         fill = {

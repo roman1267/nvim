@@ -24,6 +24,7 @@ return {
                     if name:find("goto") == 1 then
                         move[name] = function(q, ...)
                             if vim.wo.diff then
+                                -- luacheck: ignore
                                 local config = configs.get_module("textobjects.move")[name] ---@type table<string,string>
                                 for key, query in pairs(config or {}) do
                                     if q == query and key:find("[%]%[][cC]") then
@@ -103,6 +104,7 @@ return {
                 end
                 added[lang] = true
                 return true
+                ---@diagnostic disable-next-line: param-type-mismatch
             end, opts.ensure_installed)
         end
         require("nvim-treesitter.configs").setup(opts)

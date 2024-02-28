@@ -28,3 +28,5 @@ local opts = {
 local config = function()
     require("core.utils").lazy_load("nvterm", opts)
 end
+
+return config

@@ -41,7 +41,7 @@ return {
         init = function()
             require("core.utils").load_mappings("todo_comments")
         end,
-        opts = function()
+        config = function()
             require("todo-comments").setup()
         end,
     },
@@ -202,7 +202,7 @@ return {
         "rcarriga/nvim-dap-ui",
         event = "VeryLazy",
         dependencies = { "mfussenegger/nvim-dap" },
-        opts = function()
+        config = function()
             require("dapui").setup()
         end,
     },
@@ -290,14 +290,14 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         ft = "gitcommit",
-        opts = require(cfgs .. "gitsigns"),
+        config = require(cfgs .. "gitsigns"),
     },
     -- Add indentation guides even on blank lines
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "VeryLazy",
         main = "ibl",
-        opts = function()
+        config = function()
             require("ibl").setup({
                 indent = {
                     char = "┊",
@@ -318,8 +318,8 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
-        config = function(_, opts)
-            require("treesitter-context").setup(opts)
+        config = function()
+            require("treesitter-context").setup()
         end,
     },
     {
