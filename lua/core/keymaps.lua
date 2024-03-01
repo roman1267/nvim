@@ -24,6 +24,7 @@ local mappings = {
             { desc = "go to init.lua" },
         },
         { { "n", "v" }, "/", "<cmd>set nohlsearch<CR>/", { desc = "no highlights when searching" } },
+        { { "n", "v" }, "ga", "<cmd>Characterize<CR>", { desc = "Better character Information" } },
     },
     buffers = {
         -------------------- buffer navigation --------------------

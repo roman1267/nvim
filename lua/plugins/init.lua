@@ -86,20 +86,7 @@ return {
         init = function()
             require("core.utils").load_mappings("obsidian")
         end,
-        config = function()
-            require("obsidian").setup({
-                workspaces = {
-                    {
-                        name = "roman-obsidian",
-                        path = "/home/roman/OneDrive/Documents/roman-obsidian",
-                    },
-                },
-                follow_url_func = function(url)
-                    -- Open the URL in the default web browser.
-                    vim.fn.jobstart({ "xdg-open", url })
-                end,
-            })
-        end,
+        config = require(cfgs .. "obsidian"),
     },
     {
         "stevearc/conform.nvim",
