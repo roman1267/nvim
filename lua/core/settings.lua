@@ -39,6 +39,7 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- # Custom Options # --
 package.path = "/home/romanm/.config/nvim/?.lua;" .. package.path
+
 local custom_options = {
     lazy_opts = {
         change_detection = {

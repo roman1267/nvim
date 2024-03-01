@@ -319,7 +319,7 @@ return {
     },
     {
         "numToStr/Comment.nvim",
-        event = { "VeryLazy" },
+        event = { "VeryLazy", "BufNewFile" },
         config = function()
             require("Comment").setup()
         end,

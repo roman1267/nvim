@@ -8,7 +8,8 @@ local config = function()
         table.insert(words, word)
     end
 
-    local script_dir = vim.fn.expand("$XDG_CONFIG_HOME") .. "nvim/extra/lsp/"
+    -- disable virtual text for those pesky diagnostics
+    vim.diagnostic.config({ virtual_text = false })
 
     local servers = {
         rust_analyzer = {},

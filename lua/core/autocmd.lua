@@ -12,15 +12,6 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
         end
     end,
 })
--------------------- File-Specific augroup --------------------
-local file_specific_group = vim.api.nvim_create_augroup("file_specific", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-    group = file_specific_group,
-    pattern = "/home/roman/OneDrive/Other/Games/game_list.md",
-    callback = function()
-        vim.cmd("silent !cp % ~/Templates/")
-    end,
-})
 -------------------- LSP augroup --------------------
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -104,30 +95,37 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
     group = vimenter_group,
 })
--------------------- file-sourcing augroup --------------------
-local file_sourcing_group = vim.api.nvim_create_augroup("file_sourcing_group", { clear = true })
+-------------------- file-specific --------------------
+local file_specific_group = vim.api.nvim_create_augroup("file_sourcing_group", { clear = true })
 -- Automatically source tmux config after making changes to it
 
 local tmux_file = vim.env.XDG_CONFIG_HOME .. "tmux/tmux.conf"
 vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = tmux_file,
     command = "silent !tmux source-file " .. tmux_file,
-    group = file_sourcing_group,
+    group = file_specific_group,
 })
 
 -- Automatically source tmux config after making changes to it
 vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = "/home/romanm/.config/bspwm/bspwmrc",
     command = "silent !bspc wm -r",
-    group = file_sourcing_group,
+    group = file_specific_group,
 })
 
 vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = "/home/romanm/.config/dunst/dunstrc",
     command = "silent !killall dunst",
-    group = file_sourcing_group,
+    group = file_specific_group,
 })
 
+vim.api.nvim_create_autocmd("BufWritePost", {
+    group = file_specific_group,
+    pattern = "/home/roman/OneDrive/Other/Games/game_list.md",
+    callback = function()
+        vim.cmd("silent !cp % ~/Templates/")
+    end,
+})
 -------------------- mkview augroup --------------------
 local mklgroup = vim.api.nvim_create_augroup("mkview_loadview_group", { clear = true })
 
