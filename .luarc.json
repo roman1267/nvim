@@ -1,7 +1,8 @@
 {
     "diagnostics": {
         "disable": [
-            "close-non-object"
+            "close-non-object",
+            "incomplete-signature-doc"
         ],
         "groupFileStatus": {
             "ambiguity": "Any",
@@ -56,6 +57,7 @@
     },
     "workspace.checkThirdParty": false,
     "diagnostics.globals": [
-        "mapper"
+        "mapper",
+        "vim"
     ]
 }

@@ -94,6 +94,14 @@ return {
         config = require(cfgs .. "conform"),
     },
     {
+        "tpope/vim-characterize",
+        event = "UIEnter",
+    },
+    {
+        "andymass/vim-matchup",
+        lazy = false,
+    },
+    {
         "jakewvincent/mkdnflow.nvim",
         ft = "markdown",
         config = function()
