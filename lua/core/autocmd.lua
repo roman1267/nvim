@@ -126,6 +126,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
         vim.cmd("silent !cp % ~/Templates/")
     end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    group = file_specific_group,
+    pattern = "$XDG_CONFIG_HOME/eww/**",
+    callback = function()
+        vim.cmd("silent !eww reload")
+    end,
+})
 -------------------- mkview augroup --------------------
 local mklgroup = vim.api.nvim_create_augroup("mkview_loadview_group", { clear = true })
 
