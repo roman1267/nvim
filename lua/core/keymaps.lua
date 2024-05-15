@@ -128,7 +128,6 @@ local mappings = {
         { "n", "<C-Up>", "<cmd>resize +2<CR>" },
         { "n", "<C-Down>", "<cmd>resize -2<CR>" },
         { "n", "<C-Left>", "<cmd>vertical resize -2<CR>" },
-        { "n", "<c-Right>", "<CMD>vertical resize +2<CR>" },
 
         -------------------- splits navigation --------------------
         { { "n", "v", "i" }, "<C-h>", "<C-w>h" },
@@ -432,15 +431,15 @@ local mappings = {
         { "n", "<leader>olb", "<cmd>ObsidianBackLinks<CR>", { desc = "[O]bsidian [L]inks [B]ack" } },
         { "n", "<leader>oc", "<cmd>ObsidianCheck<CR>", { desc = "[O]bsidian [C]heck" } },
         { "n", "<leader>olf", "<cmd>ObsidianFollowLink<CR>", { desc = "[O]bsidian [L]ink [F]ollow" } },
-        { "n", "<leader>ole", ":ObsidianLink ", { desc = "[O]bsidian [L]ink to [E]xisting" } },
-        { "n", "<leader>oln", ":ObsidianLinkNew ", { desc = "[O]bsidian [L]ink to [N]ew" } },
+        { "n", "<leader>ole", "<cmd>ObsidianLink<CR>", { desc = "[O]bsidian [L]ink to [E]xisting" } },
+        { "n", "<leader>oln", "<cmd>ObsidianLinkNew<CR>", { desc = "[O]bsidian [L]ink to [N]ew" } },
         { "n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "[O]bsidian [O]pen" } },
         { "n", "<leader>oi", "<cmd>ObsidianPasteImg<CR>", { desc = "[O]bsidian [P]aste [I]mg" } },
         { "n", "<leader>oqs", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Switch to note" } },
-        { "n", "<leader>or", ":ObsidianRename ", { desc = "rename a file across the vault" } },
+        { "n", "<leader>or", "<cmd>ObsidianRename<CR>", { desc = "rename a file across the vault" } },
         { "n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search | create notes in vault" } },
-        { "n", "<leader>ot", ":ObsidianTemplate ", { desc = "Paste template into buffer" } },
-        { "n", "<leader>ow", ":ObsidianWorkspace ", { desc = "Open a workspace" } },
+        { "n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Paste template into buffer" } },
+        { "n", "<leader>ow", "<cmd>ObsidianWorkspace<CR>", { desc = "Open a workspace" } },
     },
     -------------------- Undo Tree --------------------
     undo_tree = {

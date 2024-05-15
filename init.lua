@@ -1,5 +1,5 @@
-local options = require("core.settings")
+require("core.settings")
 require("core.utils").bootstrap_or_nil()
-require("lazy").setup("plugins", options.lazy_opts)
+require("lazy").setup("plugins", require("core.settings").lazy_opts)
 require("core.keymaps")
 require("core.autocmd")
