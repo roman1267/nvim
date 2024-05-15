@@ -1,13 +1,17 @@
 local cfgs = "plugins.configs."
+local is_lazy = false
+
 return {
     {
         "nvim-tree/nvim-web-devicons",
+        lazy = is_lazy,
         enabled = true,
     },
     {
         "nvim-treesitter/nvim-treesitter",
+        lazy = is_lazy,
         dependencies = { "nvim-treesitter/nvim-treesitter-context", "nvim-treesitter/nvim-treesitter-textobjects" },
-        event = { "UIEnter" },
+        event = { "VimEnter" },
         build = function()
             pcall(require("nvim-treesitter.install").update({ with_sync = true }))
         end,
@@ -16,14 +20,16 @@ return {
             require("nvim-treesitter.query_predicates")
             require("core.utils").load_mappings("treesitter")
         end,
-        config = require(cfgs .. "treesitter"),
+        config = require(cfgs .. "_treesitter"),
     },
     {
         -- Additional text objects via treesitter
         "nvim-treesitter/nvim-treesitter-textobjects",
+        lazy = is_lazy,
     },
     {
         "L3MON4D3/LuaSnip",
+        lazy = is_lazy,
         dependencies = { "rafamadriz/friendly-snippets" },
         build = "make install_jsregexp",
         config = function()
@@ -36,6 +42,7 @@ return {
     -- highlighting of code comments like 'HACK,' 'BUG,' etc.
     {
         "folke/todo-comments.nvim",
+        lazy = is_lazy,
         dependencies = { "nvim-lua/plenary.nvim" },
         event = { "BufReadPre", "BufNewFile" },
         init = function()
@@ -47,23 +54,28 @@ return {
     },
     {
         "HiPhish/debugpy.nvim",
+        lazy = is_lazy,
         ft = "python",
     },
     {
         "mfussenegger/nvim-dap-python",
+        lazy = is_lazy,
         dependencies = { "HiPhish/debugpy.nvim" },
         ft = "python",
     },
     {
         "luckasRanarison/tree-sitter-hyprlang",
+        lazy = is_lazy,
         -- TODO: requires experimentation
         event = { "BufReadPost", "BufNewFile" },
     },
     {
         "simrat39/rust-tools.nvim",
+        lazy = is_lazy,
     },
     {
         "mbbill/undotree",
+        lazy = is_lazy,
         cmd = { "UndotreeToggle", "UndotreeShow", "UndotreeHide", "UndotreeFocus", "UndotreePersistUndo" },
         init = function()
             vim.g.undotree_SetFocusWhenToggle = 1
@@ -72,6 +84,7 @@ return {
     },
     {
         "epwalsh/obsidian.nvim",
+        lazy = is_lazy,
         version = "*",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -86,23 +99,27 @@ return {
         init = function()
             require("core.utils").load_mappings("obsidian")
         end,
-        config = require(cfgs .. "obsidian"),
+        config = require(cfgs .. "_obsidian"),
     },
     {
         "stevearc/conform.nvim",
+        lazy = is_lazy,
         event = "VeryLazy",
-        config = require(cfgs .. "conform"),
+        config = require(cfgs .. "_conform"),
     },
     {
         "tpope/vim-characterize",
+        lazy = is_lazy,
         event = "UIEnter",
     },
     {
         "andymass/vim-matchup",
-        lazy = false,
+        lazy = is_lazy,
+        event = "VeryLazy",
     },
     {
         "jakewvincent/mkdnflow.nvim",
+        lazy = is_lazy,
         ft = "markdown",
         config = function()
             require("core.utils").load_mappings("mkdnflow")
@@ -150,18 +167,21 @@ return {
     },
     {
         "lukas-reineke/headlines.nvim",
+        lazy = is_lazy,
         dependencies = "nvim-treesitter/nvim-treesitter",
         ft = "markdown",
         config = true,
     },
     {
         "ellisonleao/gruvbox.nvim",
+        lazy = is_lazy,
         enabled = true,
         event = "VimEnter",
-        config = require(cfgs .. "gruvbox"),
+        config = require(cfgs .. "_gruvbox"),
     },
     {
         "sainnhe/gruvbox-material",
+        lazy = is_lazy,
         enabled = false,
         event = "VimEnter",
         config = function()
@@ -170,6 +190,7 @@ return {
     },
     {
         "catppuccin/nvim",
+        lazy = is_lazy,
         enabled = false,
         event = "VimEnter",
         config = function()
@@ -178,56 +199,64 @@ return {
     },
     {
         "mfussenegger/nvim-dap",
+        lazy = is_lazy,
         event = "VeryLazy",
         init = function()
             require("core.utils").load_mappings("nvim_dap")
         end,
-        config = require(cfgs .. "nvim-dap"),
+        config = require(cfgs .. "_nvim-dap"),
     },
     {
         "mfussenegger/nvim-lint",
+        lazy = is_lazy,
     },
     {
         "rshkarin/mason-nvim-lint",
+        lazy = is_lazy,
         dependencies = "mfussenegger/nvim-lint",
         event = "LspAttach",
-        config = require(cfgs .. "nvim-lint"),
+        config = require(cfgs .. "_nvim-lint"),
     },
     {
         "rcarriga/nvim-dap-ui",
+        lazy = is_lazy,
         event = "VeryLazy",
-        dependencies = { "mfussenegger/nvim-dap" },
+        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
         config = function()
             require("dapui").setup()
         end,
     },
     {
         "nvim-tree/nvim-tree.lua",
+        lazy = is_lazy,
         cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen" },
         init = function()
             require("core.utils").load_mappings("nvim_tree")
         end,
-        config = require(cfgs .. "nvim-tree"),
+        config = require(cfgs .. "_nvim-tree"),
     },
     {
         "NvChad/nvterm",
+        lazy = is_lazy,
         init = function()
             require("core.utils").load_mappings("nvterm")
         end,
-        config = require(cfgs .. "nvterm"),
+        config = require(cfgs .. "_nvterm"),
     },
     {
         "nvim-telescope/telescope.nvim",
+        lazy = is_lazy,
         branch = "0.1.x",
         dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
         init = function()
             require("core.utils").load_mappings("telescope")
         end,
         cmd = { "Telescope", "TodoTelescope" },
-        config = require(cfgs .. "telescope"),
+        config = require(cfgs .. "_telescope"),
     },
     {
         "williamboman/mason.nvim",
+        lazy = is_lazy,
         build = ":MasonUpdate",
         cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
         config = function()
@@ -236,29 +265,34 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        lazy = is_lazy,
         dependencies = {
             "williamboman/mason.nvim",
             "hrsh7th/nvim-cmp",
         },
-        config = require(cfgs .. "mason-lspconfig"),
+        config = require(cfgs .. "_mason-lspconfig"),
     },
     {
-        "RRethy/vim-illuminate", -- automatic reference highlighting
+        "RRethy/vim-illuminate",
+        lazy = is_lazy, -- automatic reference highlighting
         enabled = false,
     },
     -- TODO: Set this up to work properly
     {
         "folke/neodev.nvim",
-        config = require(cfgs .. "neodev"),
+        lazy = is_lazy,
+        config = require(cfgs .. "_neodev"),
     },
     {
         "nvim-lualine/lualine.nvim",
+        lazy = is_lazy,
         event = "VeryLazy",
-        config = require(cfgs .. "lualine"),
+        config = require(cfgs .. "_lualine"),
     },
     {
         -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
+        lazy = is_lazy,
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
             "williamboman/mason.nvim",
@@ -267,16 +301,16 @@ return {
             "L3MON4D3/LuaSnip",
             --'folke/neodev.nvim',
         },
-        config = function()
-            require(cfgs .. "mason-lspconfig")
-        end,
+        config = require(cfgs .. "_mason-lspconfig"),
     },
     {
         "tpope/vim-fugitive",
+        lazy = is_lazy,
         enabled = false,
     },
     {
         "kdheepak/lazygit.nvim",
+        lazy = is_lazy,
         event = "VeryLazy",
         init = function()
             require("core.utils").load_mappings("lazygit")
@@ -284,12 +318,14 @@ return {
     },
     {
         "lewis6991/gitsigns.nvim",
+        lazy = is_lazy,
         ft = "gitcommit",
-        config = require(cfgs .. "gitsigns"),
+        config = require(cfgs .. "_gitsigns"),
     },
     -- Add indentation guides even on blank lines
     {
         "lukas-reineke/indent-blankline.nvim",
+        lazy = is_lazy,
         event = "VeryLazy",
         main = "ibl",
         config = function()
@@ -302,40 +338,49 @@ return {
     },
     {
         "windwp/nvim-autopairs",
+        lazy = is_lazy,
         enabled = false,
         event = "InsertEnter",
-        config = require(cfgs .. "autopairs"),
+        config = require(cfgs .. "_autopairs"),
     },
     {
         "akinsho/bufferline.nvim",
+        lazy = is_lazy,
         event = { "VeryLazy" },
-        config = require(cfgs .. "bufferline"),
+        config = require(cfgs .. "_bufferline"),
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
+        lazy = is_lazy,
+        dependencies = { "nvim-treesitter" },
+        enabled = false,
         config = function()
             require("treesitter-context").setup()
         end,
     },
     {
         "numToStr/Comment.nvim",
+        lazy = is_lazy,
         event = { "VeryLazy", "BufNewFile" },
         config = function()
             require("Comment").setup()
         end,
     },
     {
-        "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+        "tpope/vim-sleuth",
+        lazy = is_lazy, -- Detect tabstop and shiftwidth automatically
         event = { "BufReadPre", "BufNewFile" },
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
+        lazy = is_lazy,
         build = "make",
         cond = vim.fn.executable("make") == 1,
     },
     {
         "folke/which-key.nvim",
+        lazy = is_lazy,
         keys = { '"', "`", "d", "y", "g", "v", "z", "c", "<c-w>", "<c-r>", "!", "[", "]", "<leader>" },
-        config = require(cfgs .. "which-key"),
+        config = require(cfgs .. "_which-key"),
     },
 }
