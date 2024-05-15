@@ -6,16 +6,9 @@ local linter_table = {
     css = { "stylelint" },
 }
 
-local linters = {}
-for _, linter in ipairs(linter_table) do
-    table.insert(linters, linter)
-end
-
 local config = function()
     require("lint").linters_by_ft = linter_table
-    require("mason-nvim-lint").setup({
-        ensure_installed = linters,
-    })
+    require("mason-nvim-lint").setup()
     vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
         group = vim.api.nvim_create_augroup("nvim-lint-group", { clear = true }),
         callback = function()
