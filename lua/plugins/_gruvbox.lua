@@ -1,6 +1,6 @@
 return {
    "ellisonleao/gruvbox.nvim",
-   enabled = false,
+   enabled = true,
    lazy = true,
    event = "VimEnter",
    opts = {

@@ -13,7 +13,7 @@ return {
    end,
    opts = {
       -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = { "lua", "python", "rust", "vim", "hypr" },
+      ensure_installed = { "lua", "python", "rust", "vim", "hyprlang" },
       highlight = { enable = true },
       indent = { enable = true, disable = { "python" } },
       incremental_selection = {
@@ -71,15 +71,15 @@ return {
       },
    },
    config = function(_, opts)
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.hypr = {
-         install_info = {
-            url = "https://github.com/luckasRanarison/tree-sitter-hypr",
-            files = { "src/parser.c" },
-            branch = "master",
-         },
-         filetype = "hypr",
-      }
+      -- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      -- parser_config.hypr = {
+      --    install_info = {
+      --       url = "https://github.com/luckasRanarison/tree-sitter-hypr",
+      --       files = { "src/parser.c" },
+      --       branch = "master",
+      --    },
+      --    filetype = "hypr",
+      -- }
       if type(opts.ensure_installed) == "table" then
          ---@type table<string, boolean>
          local added = {}

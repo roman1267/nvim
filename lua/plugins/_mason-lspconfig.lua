@@ -6,7 +6,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "L3MON4D3/LuaSnip",
    },
-   lazy = true,
+   lazy = false,
    event = { "BufReadPost", "BufNewFile" },
    config = function()
       -- additional server capabilities from nvim-cmp
@@ -14,15 +14,15 @@ return {
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
       local servers = {
-         rust_analyzer = {},
-         bashls = {},
-         html = {},
-         pylsp = {},
-         lua_ls = {},
+         -- rust_analyzer = {},
+         -- bashls = {},
+         -- html = {},
+         -- pylsp = {},
+         -- lua_ls = {},
       }
 
       require("mason-lspconfig").setup({
-         ensure_installed = vim.tbl_keys(servers),
+         -- ensure_installed = vim.tbl_keys(servers),
       })
       require("mason-lspconfig").setup_handlers({
          -- Custom handlers for specific servers

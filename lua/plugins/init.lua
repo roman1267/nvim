@@ -2,23 +2,23 @@ return {
    {
       "nvim-tree/nvim-web-devicons",
       enabled = true,
-      lazy = true,
+      lazy = false,
    },
    {
       -- Additional text objects via treesitter
       "nvim-treesitter/nvim-treesitter-textobjects",
-      lazy = true,
+      lazy = false,
    },
    {
       "elkowar/yuck.vim",
-      lazy = true,
+      lazy = false,
       ft = { "yuck" },
    },
    {
       "L3MON4D3/LuaSnip",
       dependencies = { "rafamadriz/friendly-snippets" },
       build = "make install_jsregexp",
-      lazy = true,
+      lazy = false,
       config = function()
          require("luasnip.loaders.from_vscode").lazy_load()
       end,
@@ -27,7 +27,7 @@ return {
    {
       "folke/todo-comments.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
-      lazy = true,
+      lazy = false,
       event = { "VeryLazy" },
       init = function()
          require("core/utils").load_mappings("todo_comments")
@@ -38,46 +38,41 @@ return {
    },
    {
       "HiPhish/debugpy.nvim",
-      lazy = true,
+      lazy = false,
       ft = "py",
    },
    {
       "mfussenegger/nvim-dap-python",
-      lazy = true,
+      lazy = false,
       ft = "py",
    },
    {
       "luckasRanarison/tree-sitter-hypr",
       -- TODO: requires experimentation
-      lazy = true,
+      lazy = false,
       event = { "BufReadPost", "BufNewFile" },
    },
    {
       "simrat39/rust-tools.nvim",
-      lazy = true,
+      lazy = false,
    },
    {
-      "catppuccin/nvim",
-      enabled = true,
-      lazy = true,
-      event = "VimEnter",
-      config = function()
-         vim.cmd.colorscheme("catppuccin-macchiato")
-      end,
+      "andymass/vim-matchup",
+      lazy = false,
    },
    {
       "rcarriga/nvim-dap-ui",
-      dependencies = "mfussenegger/nvim-dap",
-      lazy = true,
+      dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+      lazy = false,
       event = "LspAttach",
-      opts = function()
+      config = function()
          require("dapui").setup()
       end,
    },
    {
       "williamboman/mason.nvim",
       build = ":MasonUpdate",
-      lazy = true,
+      lazy = false,
       cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
       config = function()
          require("mason").setup()
@@ -86,16 +81,16 @@ return {
    {
       "RRethy/vim-illuminate", -- automatic reference highlighting
       enabled = false,
-      lazy = true,
+      lazy = false,
    },
    {
       "tpope/vim-fugitive",
       enabled = false,
-      lazy = true,
+      lazy = false,
    },
    {
       "kdheepak/lazygit.nvim",
-      lazy = true,
+      lazy = false,
       event = "VeryLazy",
       init = function()
          require("core/utils").load_mappings("lazygit")
@@ -104,7 +99,7 @@ return {
    -- Add indentation guides even on blank lines
    {
       "lukas-reineke/indent-blankline.nvim",
-      lazy = true,
+      lazy = false,
       event = "VeryLazy",
       main = "ibl",
       opts = function()
@@ -117,7 +112,7 @@ return {
    },
    {
       "numToStr/Comment.nvim",
-      lazy = true,
+      lazy = false,
       event = { "VeryLazy" },
       config = function()
          require("Comment").setup()
@@ -125,13 +120,13 @@ return {
    },
    {
       "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-      lazy = true,
+      lazy = false,
       event = { "BufReadPre", "BufNewFile" },
    },
    {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
       cond = vim.fn.executable("make") == 1,
-      lazy = true,
+      lazy = false,
    },
 }
