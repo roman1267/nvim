@@ -23,7 +23,7 @@ local config = function()
             type = "lldb",
             request = "launch",
             program = function()
-                return vim.fn.input({ "Path to executable: ", vim.fn.expand("%:p:h:s?src?target/debug/?"), "file" })
+                return vim.fn.input("Path to executable: ", vim.fn.expand("%:p:h:s?src?target/debug/?"), "file")
             end,
             cwd = "${workspaceFolder}",
             stopOnEntry = false,
