@@ -1,5 +1,7 @@
+-- NOTE: Always define dependencies separately
+
 local cfgs = "plugins.configs."
-local is_lazy = false
+local is_lazy = true
 
 return {
     {
@@ -119,7 +121,7 @@ return {
     },
     {
         "jakewvincent/mkdnflow.nvim",
-        lazy = is_lazy,
+        lazy = true,
         ft = "markdown",
         config = function()
             require("core.utils").load_mappings("mkdnflow")
@@ -213,9 +215,12 @@ return {
     {
         "rshkarin/mason-nvim-lint",
         lazy = is_lazy,
-        dependencies = "mfussenegger/nvim-lint",
+        dependencies = { "mfussenegger/nvim-lint", "williamboman/mason.nvim" },
         event = "LspAttach",
         config = require(cfgs .. "_nvim-lint"),
+    },
+    {
+        "nvim-neotest/nvim-nio"
     },
     {
         "rcarriga/nvim-dap-ui",
