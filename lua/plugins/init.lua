@@ -70,6 +70,9 @@ return {
       end,
    },
    {
+      "mfussenegger/nvim-lint"
+   },
+   {
       "williamboman/mason.nvim",
       build = ":MasonUpdate",
       lazy = false,
