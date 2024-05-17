@@ -18,14 +18,14 @@ return {
       -- automatically install linters specified by nvim-lint
       automatic_installation = true,
    },
-   config = function(_, opts)
+   config = function()
       require("lint").linters_by_ft = linter_table
-      require("mason-nvim-lint").setup(opts)
-      -- vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
-      --    group = vim.api.nvim_create_augroup("nvim-lint-group", { clear = true }),
-      --    callback = function()
-      --       require("lint").try_lint()
-      --    end,
-      -- })
+      require("mason-nvim-lint").setup()
+      vim.api.nvim_create_autocmd({ "BufWritePost", "LspAttach" }, {
+         group = vim.api.nvim_create_augroup("nvim-lint-group", { clear = true }),
+         callback = function()
+            require("lint").try_lint()
+         end,
+      })
    end,
 }
