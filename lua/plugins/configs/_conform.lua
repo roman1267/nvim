@@ -1,7 +1,7 @@
 local opts = {
     formatters_by_ft = {
         lua = { "stylua" },
-        bash = { "beautysh" },
+        bash = { "shfmt" },
         sh = { "beautysh" },
         -- Conform will run multiple formatters sequentially
         -- python = { 'isort', 'black' },
