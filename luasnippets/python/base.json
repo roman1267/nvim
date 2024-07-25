@@ -1,9 +1,0 @@
-{
-  "aoc_2023": {
-    "prefix": "a23",
-    "body": [
-      "with open(\"/home/roman/code/aoc_2023_python/inputs/\", encoding=\"UTF-8\") as file:\n\tfor line in file.readlines():\n\t\tpass"
-    ],
-    "description": "template for aoc 2023"
-  }
-}
