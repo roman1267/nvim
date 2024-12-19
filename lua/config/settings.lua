@@ -14,12 +14,12 @@ vim.opt.mouse = "a"
 -- Wrapped lines align with start of line
 vim.opt.breakindent = true
 -- Tabs are 4 characters wide
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 -- Tabs are expanded to spaces
 vim.opt.expandtab = true
 -- 4 space indents
-vim.opt.shiftwidth = 4
+vim.opt.shiftwidth = 2
 -- Store undo history
 vim.opt.undofile = true
 -- New lines have same indent as previous
