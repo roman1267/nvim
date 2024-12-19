@@ -10,7 +10,7 @@ return {
     update_focused_file = {
       enable = true,
       update_root = {
-        enable = false,
+        enable = true,
         ignore_list = {},
       },
     },

@@ -1,7 +1,6 @@
 --- NOTE: Set up LSP clients
 
 -- List of servers to be set up and options
-
 local servers = {
   rust_analyzer = {},
   bashls = {},
@@ -68,21 +67,16 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
   },
   config = function()
+    -- Establish LSP server capabilities
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+
     require("mason-lspconfig").setup({
       ensure_installed = vim.tbl_keys(servers),
     })
     require("mason-lspconfig").setup_handlers({
       ["lua_ls"] = function()
-        require("lazy").load({ plugins = "lazydev.nvim" })
         require("lspconfig")["lua_ls"].setup({
           capabilities = capabilities,
           settings = servers["lua_ls"],
