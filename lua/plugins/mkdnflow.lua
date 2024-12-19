@@ -1,3 +1,4 @@
+--- NOTE: Help interact and display md files better
 return {
   "jakewvincent/mkdnflow.nvim",
   enabled = false,

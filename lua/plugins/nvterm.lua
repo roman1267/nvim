@@ -1,3 +1,5 @@
+--- NOTE: Easy terminal integration
+
 return {
   "NvChad/nvterm",
   opts = {},

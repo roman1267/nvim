@@ -1,3 +1,4 @@
+--- NOTE: File tree for Nvim
 return {
   "nvim-tree/nvim-tree.lua",
   version = "*",

@@ -1,3 +1,4 @@
+--- NOTE: Set up Debug Adapter Protocol Debuggers
 return {
   "mfussenegger/nvim-dap",
   enabled = true,

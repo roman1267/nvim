@@ -1,3 +1,4 @@
+--- NOTE: Integration with Obsidian Notes
 return {
   "epwalsh/obsidian.nvim",
   version = "*",

@@ -1,3 +1,4 @@
+--- NOTE: Collection of find utils
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },

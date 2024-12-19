@@ -1,3 +1,4 @@
+--- NOTE: Lsp info for Lazy & Nvim configuration
 return {
   {
     "folke/lazydev.nvim",

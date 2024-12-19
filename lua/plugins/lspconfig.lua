@@ -1,6 +1,4 @@
--- Establish LSP server capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+--- NOTE: Set up LSP clients
 
 -- List of servers to be set up and options
 

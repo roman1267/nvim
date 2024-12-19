@@ -1,3 +1,4 @@
+--- NOTE: Configure and run formatters for code
 return {
   "stevearc/conform.nvim",
   opts = {
