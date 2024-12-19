@@ -5,8 +5,17 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  config = function()
-    require("nvim-tree").setup()
+  opts = {
+    update_focused_file = {
+      enable = true,
+      update_root = {
+        enable = false,
+        ignore_list = {},
+      },
+    },
+  },
+  config = function(_, opts)
+    require("nvim-tree").setup(opts)
     require("config.utils").load_mappings("nvim_tree")
   end,
 }

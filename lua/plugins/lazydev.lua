@@ -7,6 +7,8 @@ return {
         -- See the configuration section for more details
         -- Load luvit types when the `vim.uv` word is found
         { path = "luvit-meta/library", words = { "vim%.uv" } },
+        "init.lua",
+        { plugins = { "nvim-dap-ui" }, types = true },
       },
     },
   },
@@ -21,5 +23,4 @@ return {
       })
     end,
   },
-  -- { "folke/neodev.nvim", enabled = false }, -- make sure to uninstall or disable neodev.nvim
 }
