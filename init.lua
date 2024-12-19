@@ -2,7 +2,7 @@
 require("config.settings")
 require("config.lazy")
 
--- Load critical keybinds directly
+-- Load critical keybinds immediately
 require("config.utils").load_mappings("global")
 require("config.utils").load_mappings("buffers")
 require("config.utils").load_mappings("splits")
