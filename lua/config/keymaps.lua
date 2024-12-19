@@ -133,7 +133,7 @@ local mappings = {
   nvterm = {
     {
       "n",
-      "<C-l>",
+      "<M-m>",
       function()
         require("nvterm.terminal").send(ft_cmds[vim.bo.filetype])
       end,
