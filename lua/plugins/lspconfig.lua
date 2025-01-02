@@ -64,30 +64,48 @@ local servers = {
   },
 }
 return {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-    "williamboman/mason-lspconfig.nvim",
+  {
+    "williamboman/mason.nvim",
+    lazy = false,
+    priority = 100,
+    opts = {},
   },
-  config = function()
-    -- Establish LSP server capabilities
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-    require("mason-lspconfig").setup({
-      ensure_installed = vim.tbl_keys(servers),
-    })
-    require("mason-lspconfig").setup_handlers({
-      ["lua_ls"] = function()
-        require("lspconfig")["lua_ls"].setup({
-          capabilities = capabilities,
-          settings = servers["lua_ls"],
-        })
-      end,
-      function(server_name) -- default handler
-        require("lspconfig")[server_name].setup({
-          capabilities = capabilities,
-          settings = servers[server_name],
-        })
-      end,
-    })
-  end,
+  {
+    "williamboman/mason-lspconfig",
+    dependencies = { "williamboman/mason.nvim" },
+    lazy = false,
+    priority = 99,
+    opts = {},
+  },
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "hrsh7th/nvim-cmp",
+      "williamboman/mason.nvim",
+    },
+    lazy = false,
+    priority = 98,
+    config = function()
+      -- Establish LSP server capabilities
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.tbl_keys(servers),
+      })
+      require("mason-lspconfig").setup_handlers({
+        ["lua_ls"] = function()
+          require("lspconfig")["lua_ls"].setup({
+            capabilities = capabilities,
+            settings = servers["lua_ls"],
+          })
+        end,
+        function(server_name) -- default handler
+          require("lspconfig")[server_name].setup({
+            capabilities = capabilities,
+            settings = servers[server_name],
+          })
+        end,
+      })
+    end,
+  },
 }
