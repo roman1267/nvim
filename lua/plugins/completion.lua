@@ -33,13 +33,11 @@ return {
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },
+        {
+          name = "lazydev",
+          group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+        },
       }),
-    })
-
-    -- Set up lspconfig.
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    require("lspconfig")["lua_ls"].setup({
-      capabilities = capabilities,
     })
   end,
 }
