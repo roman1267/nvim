@@ -2,7 +2,7 @@
 
 -- List of servers to be set up and options
 local servers = {
-  rust_analyzer = {},
+  jdtls = {},
   bashls = {},
   html = {},
   ruff = {},
