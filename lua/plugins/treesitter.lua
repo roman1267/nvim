@@ -14,7 +14,9 @@ return {
 
     configs.setup({
       ensure_installed = { "rust", "lua", "vim", "vimdoc", "query", "json", "jsonc", "css", "html", "python" },
+      auto_install = true,
       sync_install = false,
+      ignore_install = {},
       highlight = { enable = true },
       indent = { enable = true },
     })

@@ -5,7 +5,7 @@ return {
   event = "VeryLazy",
   keys = {
     {
-      "<leader>?",
+      "<leader>w",
       function()
         require("which-key").show({ global = false })
       end,
