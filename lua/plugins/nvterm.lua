@@ -3,6 +3,7 @@
 local ft_cmds = {
   python = "python3 " .. vim.fn.expand("%"),
   rust = "bacon",
+  java = "java " .. vim.fn.expand("%"),
 }
 
 return {
@@ -13,11 +14,12 @@ return {
       "<M-m>",
       function()
         require("nvterm.terminal").send(ft_cmds[vim.bo.filetype])
+        vim.cmd("wincmd H")
       end,
       {
         noremap = true,
         silent = true,
-        desc = "ft-specific term",
+        desc = "ft-specific term command",
       },
     },
     {
