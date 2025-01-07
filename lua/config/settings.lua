@@ -49,3 +49,7 @@ vim.o.updatetime = 250
 -- Folds are handled by treesitter
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+-- Disable virtual text
+vim.diagnostic.config({
+  virtual_text = false,
+})
