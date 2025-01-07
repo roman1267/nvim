@@ -1,0 +1,28 @@
+{
+  "name": "roman-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "all"
+        ],
+        "path": "./global.json"
+      },
+      {
+        "language": [
+          "python"
+        ],
+        "path": "./python/base.json"
+      },
+      {
+        "language": [
+          "java"
+        ],
+        "path": "./java/base.json"
+      }
+    ]
+  }
+}
