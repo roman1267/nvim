@@ -1,3 +1,6 @@
 --- NOTE: Collection of icons for general use
 
-return { "nvim-tree/nvim-web-devicons" }
+return {
+  "nvim-tree/nvim-web-devicons",
+  event = "VeryLazy",
+}

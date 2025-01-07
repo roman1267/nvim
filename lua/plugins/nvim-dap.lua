@@ -3,6 +3,22 @@ return {
   "mfussenegger/nvim-dap",
   enabled = true,
   lazy = true,
+  cmd = {
+    "DapClearBreakpoints",
+    "DapContinue",
+    "DapDisconnect",
+    "DapEval",
+    "DapNew",
+    "DapRestartFrame",
+    "DapSetLogLevel",
+    "DapShowLog",
+    "DapStepInto",
+    "DapStepOut",
+    "DapStepOver",
+    "DapTerminate",
+    "DapToggleBreakpoint",
+    "DapToggleRepl",
+  },
   keys = {
     {
       "<leader>dt",

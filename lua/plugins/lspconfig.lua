@@ -66,15 +66,13 @@ local servers = {
 return {
   {
     "williamboman/mason.nvim",
-    lazy = false,
-    priority = 100,
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
     opts = {},
   },
   {
-    "williamboman/mason-lspconfig",
+    "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
-    lazy = false,
-    priority = 99,
+    lazy = true,
     opts = {},
   },
   {
@@ -84,13 +82,13 @@ return {
       "hrsh7th/nvim-cmp",
       "williamboman/mason.nvim",
     },
-    lazy = false,
-    priority = 98,
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       -- Establish LSP server capabilities
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(servers),
+        automatic_installation = true,
       })
       require("mason-lspconfig").setup_handlers({
         ["lua_ls"] = function()

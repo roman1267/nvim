@@ -3,6 +3,14 @@ return {
   "folke/todo-comments.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {},
+  event = { "BufReadPost", "BufNewFile" },
+  cmd = {
+    "TodoFzfLua",
+    "TodoLocList",
+    "TodoTelescope",
+    "TodoTrouble",
+    "TodoQuickFix",
+  },
   keys = {
     {
       "]t",

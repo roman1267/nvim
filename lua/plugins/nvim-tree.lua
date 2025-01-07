@@ -2,10 +2,24 @@
 return {
   "nvim-tree/nvim-tree.lua",
   version = "*",
-  lazy = false,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
+  lazy = false,
+  -- cmd = {
+  --   "NvimTreeClipboard",
+  --   "NvimTreeClose",
+  --   "NvimTreeCollapse",
+  --   "NvimTreeCollapseKeepBuffers",
+  --   "NvimTreeFindFile",
+  --   "NvimTreeFindFileToggle",
+  --   "NvimTreeFocus",
+  --   "NvimTreeHiTest",
+  --   "NvimTreeOpen",
+  --   "NvimTreeRefresh",
+  --   "NvimTreeResize",
+  --   "NvimTreeToggle",
+  -- },
   keys = {
     {
       "<C-f>",

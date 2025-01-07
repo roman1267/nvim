@@ -1,6 +1,8 @@
 --- NOTE: Configure and run formatters for code
 return {
   "stevearc/conform.nvim",
+  cmd = "ConformInfo",
+  event = { "BufWritePre" },
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
@@ -18,7 +20,4 @@ return {
       lsp_format = "fallback",
     },
   },
-  config = function(_, opts)
-    require("conform").setup(opts)
-  end,
 }
