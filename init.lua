@@ -1,4 +1,4 @@
--- Require general settings first, then setup of Lazy
+-- Require general settings first, then setup Lazy.nvim
 require("config.settings")
 require("config.lazy")
 

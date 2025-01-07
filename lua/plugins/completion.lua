@@ -1,3 +1,4 @@
+--- NOTE: Set up completion and snippets
 return {
   "hrsh7th/nvim-cmp",
   dependencies = {
