@@ -36,8 +36,9 @@ local lsp_progress = {
 }
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  enabled = false,
+  dependencies = { "nvim-tree/nvim-web-devicons", "arkav/lualine-lsp-progress" },
+  enabled = true,
+  event = "UIEnter",
   opts = {
     options = {
       icons_enabled = true,
@@ -55,9 +56,9 @@ return {
       always_divide_middle = true,
       globalstatus = false,
       refresh = {
-        statusline = 1000,
-        tabline = 1000,
-        winbar = 1000,
+        statusline = 50,
+        tabline = 50,
+        winbar = 50,
       },
     },
     sections = {
