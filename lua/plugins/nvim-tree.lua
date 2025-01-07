@@ -6,6 +6,13 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
+  keys = {
+    {
+      "<C-f>",
+      "<cmd> NvimTreeToggle <cr>",
+      { silent = true },
+    },
+  },
   opts = {
     update_focused_file = {
       enable = true,
@@ -15,8 +22,4 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    require("nvim-tree").setup(opts)
-    require("config.utils").load_mappings("nvim_tree")
-  end,
 }

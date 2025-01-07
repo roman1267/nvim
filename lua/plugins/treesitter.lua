@@ -2,6 +2,12 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  keys = {
+    { "[d", vim.diagnostic.goto_prev },
+    { "]d", vim.diagnostic.goto_next },
+    { "<leader>e", vim.diagnostic.open_float },
+    -- {'n', '<leader>q', vim.diagnostic.setloclist}
+  },
   config = function()
     local configs = require("nvim-treesitter.configs")
 
